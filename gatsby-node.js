@@ -3,12 +3,24 @@
  *
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
-// You can delete this file if you're not using it
+// exports.onPreInit = () => console.log("Loaded gatsby-remark-amazon-link")
 
-/**
- * You can uncomment the following line to verify that
- * your plugin is being loaded in your site.
- *
- * See: https://www.gatsbyjs.com/docs/creating-a-local-plugin/#developing-a-local-plugin-that-is-outside-your-project
- */
-exports.onPreInit = () => console.log("Loaded gatsby-starter-plugin")
+exports.pluginOptionsSchema = ({ Joi }) => {
+    return Joi.object({
+        convertTitle: Joi.string()
+            .default('$amazon')
+            .description('Title of markdown link to convert'),
+        marketplace: Joi.string()
+            .default('www.amazon.co.jp')
+            .description('Target of amazon region'),
+        partnerTag: Joi.string()
+            .required()
+            .description('Amazon Associates tag.'),
+        accessKey: Joi.string()
+            .required()
+            .description("Access key"),
+        secretKey: Joi.string()
+            .required()
+            .description("Secret key")
+    })
+}

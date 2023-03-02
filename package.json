@@ -1,16 +1,31 @@
 {
-  "name": "gatsby-starter-plugin",
+  "name": "gatsby-remark-amazon-link",
   "version": "1.0.0",
-  "description": "A minimal boilerplate for the essential files Gatsby looks for in a plugin",
-  "main": "index.js",
+  "description": "Convert Amazon Link to amazon associate",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo \"No build script setup\""
   },
   "keywords": [
     "gatsby",
-    "gatsby-plugin"
+    "gatsby-plugin",
+    "amazon",
+    "amazon-associate",
+    "remark",
+    "card",
+    "linkcard",
+    "gatsby-remark-plugin",
+    "markdown"
   ],
-  "author": "Kyle Gill <kyle.robert.gill@gmail.com>",
-  "license": "0BSD"
+  "author": "Junya Morioka <mjun@mjunya.com>",
+  "license": "0BSD",
+  "dependencies": {
+    "amazon-paapi": "^1.0.7",
+    "unist-util-visit": "^2.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjun0812/gatsby-remark-amazon-link.git"
+  }
 }

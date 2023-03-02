@@ -9,7 +9,8 @@
 
 ## Features
 
-This plugin is replaced markdown's amazon link with beautiful linkcard used [Amazon PA API v5](https://webservices.amazon.com/paapi5/documentation/).
+This plugin is replaced markdown's amazon link with
+beautiful linkcard used [Amazon PA API v5](https://webservices.amazon.com/paapi5/documentation/).
 
 ![linkcard-example](assets/preview.png)
 
@@ -26,23 +27,26 @@ npm install --save gatsby-remark-amazon-link
 2. Enable plugin in your `gatsby-config.js`.
 
 ```js
-plugins: [
-  {
-    resolve: `gatsby-remark-amazon-link`,
-    options: {
-      accessKey: "xxxxxxxxxxxx",
-      secretKey: "xxxxxxxxxxxx",
-      partnerTag: "xxxxxxx-22",
-      marketplace: "www.amazon.co.jp",
+resolve: `gatsby-transformer-remark`,
+options: {
+  plugins: [
+    {
+      resolve: `gatsby-remark-amazon-link`,
+      options: {
+        accessKey: "xxxxxxxxxxxx",
+        secretKey: "xxxxxxxxxxxx",
+        partnerTag: "xxxxxxx-22",
+        marketplace: "www.amazon.co.jp",
+      }
     }
-  }
-];
+  ]
+};
 ```
 
-3. Load css in your `gatsby-browser.js`.
+1. Load css in your `gatsby-browser.js`.
 
 ```js
-import 'gatsby/styles/default.css';
+import 'gatsby-remark-amazon-link/styles/default.css';
 ```
 
 ## Usage

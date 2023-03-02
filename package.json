@@ -19,7 +19,7 @@
     "markdown"
   ],
   "author": "Junya Morioka <mjun@mjunya.com>",
-  "license": "0BSD",
+  "license": "MIT",
   "dependencies": {
     "amazon-paapi": "^1.0.7",
     "unist-util-visit": "^2.0.3"

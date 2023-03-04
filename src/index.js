@@ -12,7 +12,7 @@ module.exports = async ({ markdownAST }, pluginOptions) => {
         if (title !== convertTitle) {
             return
         }
-        if (url.indexOf(marketplace) === -1) {
+        if (url.indexOf(marketplace.replace("www.", "")) === -1) {
             return
         }
 
@@ -56,7 +56,7 @@ const getHTML = (title, imageUrl, url, marketplace) => {
         <a class="amazon-card-container" href="${url}">
           <div class="amazon-card-body">
             <div class="amazon-card-title">${title}</div>
-            <div class="amazon-card-domain">${marketplace}</div>
+            <div class="amazon-card-domain">${marketplace.replace("www.", "")}</div>
           </div>
           <div class="amazon-card-image-container" >
             <img class="amazon-card-image" src="${imageUrl}" loading="lazy" alt="${title}-image" />

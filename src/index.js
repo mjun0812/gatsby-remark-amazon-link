@@ -1,5 +1,7 @@
 const visit = require('unist-util-visit')
 const amazonPaapi = require("amazon-paapi")
+const sleep = waitTime => new Promise( resolve => setTimeout(resolve, waitTime) );
+
 
 module.exports = async ({ markdownAST }, pluginOptions) => {
     const links = []
@@ -23,7 +25,13 @@ module.exports = async ({ markdownAST }, pluginOptions) => {
     if (links.length == 0) {
         return markdownAST
     }
-    await convertLink(links, accessKey, secretKey, partnerTag, marketplace)
+    console.log("Num AmazonLink:", links.length)
+
+    const chunkSize = 10
+    for (let i = 0; i < links.length; i+= chunkSize){
+        target = links.slice(i, i + chunkSize)
+        await convertLink(target, accessKey, secretKey, partnerTag, marketplace)
+    }
 
     return markdownAST
 }
@@ -33,6 +41,9 @@ const convertLink = async (links, accessKey, secretKey, partnerTag, marketplace)
         return link.url.match(/[^0-9A-Z]([0-9A-Z]{10})([^0-9A-Z]|$)/)[1]
     })
     let results = await fetchAmazon(asins, accessKey, secretKey, partnerTag, marketplace)
+    if (results == null){
+        return
+    }
     for (let i = 0; i < links.length; i++) {
         if (results[i] == null) {
             continue
@@ -85,10 +96,12 @@ async function fetchAmazon(asins, accessKey, secretKey, partnerTag, marketplace)
     }
 
     try {
+        await sleep(10)
         const data = await amazonPaapi
             .GetItems(commonParameters, requestPatameters)
         return data.ItemsResult.Items
     } catch (error) {
+        console.log("Error:", error)
         return null
     }
 }
